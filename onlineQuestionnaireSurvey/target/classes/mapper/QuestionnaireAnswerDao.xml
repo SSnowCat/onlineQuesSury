@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicnu.baby.dao.QuestionnaireAnswerDao">
+    <!-- 提交答案 -->
+	<insert id="insert" parameterType="com.sicnu.baby.bean.QuestionnaireAnswer">
+		insert ignore into questionnaire_answer(qes_id,qes_r_set,session_id)
+		values(#{qAnswer.qesId},#{qAnswer.qesRSet},#{qAnswer.sessionId})
+	</insert>
+	
+	<select id="getAnswerViewBySessionId" resultType="com.sicnu.baby.bean.AnswerView">
+	    select 
+	      qa.id,
+	      qa.qes_id,
+	      q.qes_title
+	    from questionnaire_answer qa
+	    inner join questionnaire q on qa.qes_id=q.qes_id
+	    where qa.session_id=#{sessionId}
+	</select>
+	
+	<select id="getQuestionnaireAnswerById" resultType="com.sicnu.baby.bean.QuestionnaireAnswer">
+	    select 
+	      qa.id,
+	      qa.qes_id,
+	      qa.qes_r_set,
+	      qa.create_time,
+	      qa.session_id,
+	      q.qes_id "questionnaire.qes_id",
+	      q.qes_information "questionnaire.qes_information",
+	      q.qes_title "questionnaire.qes_title",
+	      q.is_public "questionnaire.is_public",
+	      q.start_time "questionnaire.start_time",
+	      q.end_time "questionnaire.end_time"
+	    from questionnaire_answer qa
+	    inner join questionnaire q on qa.qes_id=q.qes_id
+	    where qa.id=#{id} 
+	</select>
+	
+	<select id="getQAnswerByQuesId" resultType="java.lang.String">
+	   select qes_r_set 
+	   from questionnaire_answer
+	   where qes_id=#{qesId}
+	</select>
+</mapper>

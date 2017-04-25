@@ -1,0 +1,46 @@
+CREATE DATABASE `onlinequerstionnairesurvey`; /*!40100 COLLATE 'utf8_bin' */
+
+CREATE TABLE `user` (
+	`username` VARCHAR(20) NOT NULL COMMENT '用户名' COLLATE 'utf8_bin',
+	`password` VARCHAR(20) NOT NULL COMMENT '密码' COLLATE 'utf8_bin',
+	`user_type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '0表示用户,1表示管理员',
+	PRIMARY KEY (`username`)
+)
+COMMENT='用户表,记录用户信息'
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `questionnaire` (
+	`ques_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '问卷的主键',
+	`qes_information` TEXT NOT NULL COMMENT '问卷的主要内容，题目' COLLATE 'utf8_bin',
+	`username` VARCHAR(20) NOT NULL COMMENT '用户表的主键，问卷的创建者' COLLATE 'utf8_bin',
+	`qes_profix` VARCHAR(200) NOT NULL COMMENT '说明问卷作用,调查目标' COLLATE 'utf8_bin',
+	`qes_name` VARCHAR(50) NOT NULL COMMENT '问卷的名字' COLLATE 'utf8_bin',
+	`qes_result` TEXT NULL COMMENT '问卷调查的分析结果' COLLATE 'utf8_bin',
+	`is_public` TINYINT(4) NULL DEFAULT '0' COMMENT '标记问卷是否公开0不公开1公开',
+	PRIMARY KEY (`ques_id`),
+	INDEX `FK_questionnaire_user` (`username`),
+	CONSTRAINT `FK_questionnaire_user` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+)
+COMMENT='问卷表,存储问卷的相关信息'
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `questionnaire_answer` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`qes_id` INT(11) NOT NULL COMMENT 'questionnaire表的主键',
+	`qes_r_set` TEXT NULL COMMENT '相应问卷的答案' COLLATE 'utf8_bin',
+	`qes_r_set_any` TEXT NULL COMMENT '问卷的分析结果' COLLATE 'utf8_bin',
+	PRIMARY KEY (`id`),
+	INDEX `FK_questionnaire_answer_questionnaire` (`qes_id`),
+	CONSTRAINT `FK_questionnaire_answer_questionnaire` FOREIGN KEY (`qes_id`) REFERENCES `questionnaire` (`ques_id`)
+)
+COMMENT='用于记录问卷的答案，及个人问卷的结果信息'
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;

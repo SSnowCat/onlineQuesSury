@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicnu.baby.dao.QuestionnaireDao">
+	<insert id="insertByQuestionnaire">
+		insert ignore into questionnaire(
+		qes_information,
+		username,
+		qes_profix,
+		qes_title,
+		is_public,
+		start_time,
+		end_time)
+		values(
+		#{questionnaire.qesInformation},
+		#{questionnaire.username},
+		#{questionnaire.qesProfix},
+		#{questionnaire.qesTitle},
+		#{questionnaire.isPublic},
+		#{questionnaire.startTime},
+		#{questionnaire.endTime}
+		)
+	</insert>
+
+
+	<select id="getAllQuestionByPage" resultType="com.sicnu.baby.bean.Questionnaire">
+		select
+		qes_id,
+		qes_title,
+		is_public,
+		create_time,
+		start_time,
+		end_time
+		from questionnaire
+		<where>
+			<if test="username != null and !&quot;&quot;.equals(username.trim())">
+				and username=#{username}
+			</if>
+			<if test="resp != null">
+			   and now() <![CDATA[ >= ]]> start_time 
+			   and now() <![CDATA[ <= ]]> end_time
+			</if>
+		</where>
+		order by create_time DESC
+	</select>
+    <select id="isPublic" resultType="Short">
+        select is_public
+        from questionnaire
+        where qes_id=#{quesId}
+    </select>
+	<update id="updateResult">
+		update questionnaire
+		set qes_result=#{result}
+		where qes_id=#{qesId}
+	</update>
+
+	<select id="getResultById" resultType="String">
+		select qes_result
+		from questionnaire
+		where qes_id=#{quesId}
+	</select>
+	<select id="getQuestionnaireById" resultType="com.sicnu.baby.bean.Questionnaire">
+		select
+		qes_id,
+		qes_information,
+		username,
+		qes_profix,
+		qes_title,
+		qes_result,
+		is_public,
+		create_time,
+		start_time,
+		end_time
+		from questionnaire
+		where qes_id=#{quesId}
+	</select>
+
+	<delete id="deleteById">
+		delete from questionnaire 
+		<where>
+		  <if test="quesId != null">
+		      and qes_id=#{quesId}
+		  </if>
+		  <if test="username != null and !&quot;&quot;.equals(username.trim())">
+		      and username=#{username}
+		  </if>
+		</where>
+	</delete>
+</mapper>

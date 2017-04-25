@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicnu.baby.dao.UserDao">
+<insert id="insert" parameterType="com.sicnu.baby.bean.User">
+    insert ignore into user(username,password,user_type,user_phone)
+    values(#{user.username},#{user.password},0,#{user.userPhone})
+</insert>
+
+<update id="updatePassword">
+    update user set password=#{password}
+    where username=#{username}
+</update>
+
+<update id="updatePhone">
+    update user set user_phone=#{userPhone}
+    where username=#{username}
+</update>
+
+<select id="countUserByUsername" resultType="int" parameterType="String">
+    select count(*) from user where username=#{username}
+</select>
+
+<select id="getUser" resultType="com.sicnu.baby.bean.User">
+    select 
+       username,
+       password,
+       user_type,
+       user_phone
+    from user
+    where username=#{username} and password=#{password}
+</select>
+
+<select id="getUserByUserPhone" resultType="com.sicnu.baby.bean.User">
+    select 
+       username,
+       password,
+       user_type,
+       user_phone
+    from user
+    where username=#{username} and user_phone=#{userPhone}
+</select>
+</mapper>
