@@ -1,0 +1,49 @@
+body {
+	background:url(../images/img_bg_2.jpg)no-repeat;
+	color: #fff;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 590px;
+}
+
+.header{
+	width: 900px;
+	height: 50px;
+	margin:-20px auto;
+	padding: 0px;
+	border-radius:3px; /*rgb(84,194,149); rgb(84,174,149);*/
+	background: rgb(84,194,149);
+
+}
+
+.content{
+	background:white;
+	color: grey;
+	width: 900px;
+	margin:13px auto;
+	border-radius:3px; 
+}
+.tab1 input{
+	width: 250px;
+}
+.titleName{
+	width: 202px;
+}
+.add{
+	color:rgb(84,174,149);
+	float: right;
+	
+}
+.del{
+	color:rgb(84,174,149);
+}
+#sure{
+	float: right;
+}
+#cancel{
+	float: right;
+}
+

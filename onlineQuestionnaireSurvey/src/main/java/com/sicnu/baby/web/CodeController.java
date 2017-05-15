@@ -31,7 +31,6 @@ public class CodeController {
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);  
         //存入会话session   
         session.setAttribute("identify", verifyCode.toLowerCase());
-        System.out.println(session.getAttribute("identify"));
         //生成图片  
         int w = 200, h = 80;  
         try {

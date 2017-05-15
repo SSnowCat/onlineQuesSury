@@ -38,8 +38,8 @@
 			<bean class="com.sicnu.baby.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/**/admin/private" />
-			<bean class="com.sicnu.baby.interceptor.JurisdictionInterceptor" />
+			<mvc:mapping path="/protected/*.html" />
+			<bean class="com.sicnu.baby.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

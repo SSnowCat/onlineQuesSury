@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户注册</title>
+	<link rel="stylesheet" type="text/css" href="../Survey/css/style.css">
+</head>
+<body id="reg-body">
+	<div class="reg-content">
+		<h1 class="reg-title">用 户 注 册</h1>
+		<div class="reg-warper">
+				<form>
+  		  	<ul>
+            <li id="reg-mess">这里是错误提示</li>
+            <li>
+              <input class="box" type="text" id="username" placeholder="用户名,数字,字母,下划线,且长度大于3">
+            </li>
+            <li>
+              <input class="box" type="password" id="pwd" name="" placeholder="密码,数字,字母,下划线,且长度为6～15">
+            </li>
+            <li>
+              <input class="box" type="password" id="confirm-pwd" name="" placeholder="确认密码, 同上">
+            </li>
+            <li>
+              <input class="box" type="text" id="phone" name="" placeholder="请输入正确的手机号">
+            </li>
+            <li>
+              <input class="box special" type="text" id="sig" name="" placeholder="验证码">
+              <img id="reg-sig-img" src="" style="width:98px;height:37px;" />
+            </li>
+            <li>
+              <input class="box" id="reg-btn" type="button" value="确定注册"></input>
+            </li>	
+          </ul>
+				</form>
+		</div>
+	</div>
+	<script src="../Survey/js/constants.js"></script>
+	<script src="../Survey/js/global.js"></script>
+	<script src="../Survey/js/register.js"></script>
+</body>
+</html>

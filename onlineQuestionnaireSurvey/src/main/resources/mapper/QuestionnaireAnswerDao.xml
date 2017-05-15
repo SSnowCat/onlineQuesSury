@@ -13,7 +13,8 @@
 	    select 
 	      qa.id,
 	      qa.qes_id,
-	      q.qes_title
+	      q.qes_title,
+	      q.username
 	    from questionnaire_answer qa
 	    inner join questionnaire q on qa.qes_id=q.qes_id
 	    where qa.session_id=#{sessionId}

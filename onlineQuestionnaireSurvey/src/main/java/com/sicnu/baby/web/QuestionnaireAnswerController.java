@@ -45,13 +45,13 @@ public class QuestionnaireAnswerController {
 	 * @return
 	 */
 	@RequestMapping(value="/post/user/answer",
-			method=RequestMethod.GET,
+			method=RequestMethod.POST,
 			produces={"application/json;chaeset=UTF-8"},
 			headers={"content-type=application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<String> addAnswer(@RequestBody JSONObject answer,HttpSession session){
 		try{
 			if(qService.addAnswer(answer, session.getId())){
-				return new QuestionnaireResult<>(true, "提交问卷成功,可返回查看",1);
+				return new QuestionnaireResult<>(true, "提交问卷成功",1);
 			}else {
 				return new QuestionnaireResult<>(false, "提交答案失败");
 			}
@@ -71,7 +71,7 @@ public class QuestionnaireAnswerController {
 	 */
 	@RequestMapping(value="/get/user/answer",
 			method=RequestMethod.GET,
-			produces={"application/json;chaeset=UTF-8"})
+			produces={"application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<List<AnswerView>> getAnswerViewsBySessionId(HttpSession session){
 		List<AnswerView> answerViews = qService.getAnswerViewsBySessionId(session.getId());
 		if(answerViews!=null){
@@ -89,7 +89,7 @@ public class QuestionnaireAnswerController {
 	 */
 	@RequestMapping(value="/get/{ansId}/detail/user/answer",
 			method=RequestMethod.GET,
-			produces={"application/json;chaeset=UTF-8"})
+			produces={"application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<QuestionnaireAndAnswer> getQuestionnaireAnswerById(@PathVariable("ansId") int ansId){
 		try {
 			QuestionnaireAndAnswer questionnaireAndAnswer = qService.getQuestionnaireAnswerById(ansId);

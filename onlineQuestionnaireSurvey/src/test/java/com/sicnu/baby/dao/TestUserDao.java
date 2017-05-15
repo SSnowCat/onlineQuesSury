@@ -46,7 +46,7 @@ public class TestUserDao {
 	
 	@Test
 	public void testCountUserByUsername(){
-		String username = "2014110440";
+		String username = "2014110444";
 		System.out.println(userDao.countUserByUsername(username));
 	}
 	

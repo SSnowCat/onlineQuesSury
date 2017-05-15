@@ -35,9 +35,10 @@ public class RespondentsController {
 	 */
 	@RequestMapping(value="/get/page/questionnaire",
 			method=RequestMethod.GET,
-			produces={"application/json;chaeset=UTF-8"})
+			produces={"application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<PageAndQuestionnaire> getAllQuestionnaire(HttpServletRequest request){
 		Page page = new Page();
+		page.setPageNumber(8);
 		page.setCurrentPage(1);
 		PageAndQuestionnaire pQuestionnaire = rService.getAllQuestionnaire(page);
 		if(pQuestionnaire!=null){
@@ -54,7 +55,7 @@ public class RespondentsController {
 	 */
 	@RequestMapping(value="/get/page/{index}/questionnaire",
 			method=RequestMethod.GET,
-			produces={"application/json;chaeset=UTF-8"})
+			produces={"application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<PageAndQuestionnaire> getQuestionnaireByIndex(HttpServletRequest request,@PathVariable("index") int index){
 		Page page = new Page();
 		page.setCurrentPage(index);

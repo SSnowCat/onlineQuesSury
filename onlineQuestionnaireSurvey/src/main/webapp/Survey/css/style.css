@@ -1,0 +1,57 @@
+/*
+ *
+ * @author: 余正峰;
+ * @date: startTime:2017-05-06; 
+ * @description: Questionnair system;
+ *
+*/
+	
+
+/* --reset----------------------------------
+--------------------------------------------*/
+* {margin: 0;padding: 0;}
+img {border: 0}
+ul, ol, li {list-style: none;}
+a {text-decoration: none;}
+body {
+	font:14px/1.5 "宋体",arial, verdana, sans-serif;
+	width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+/* --public--------------------------------- 
+--------------------------------------------*/
+.fl {float: left;}
+.fr {float: right;}
+.clear {zoom: 1;} /*IE*/
+.clear:after {content: " ";display: block;clear: both;}
+.ml20 {
+  margin-left: 20px;
+}
+
+/*********************************************register.html****************************************************/
+#reg-body {background: url(../images/pattern.png);}
+.reg-content {background: url(../images/ubg.jpg) no-repeat;z-index: 100;width: 400px;margin: 60px auto;background-size: cover;background-attachment: fixed;opacity: .7;box-shadow: 0 0 3px #000;border-radius: 5px;color: #666;}
+.reg-content .reg-title {height: 50px;line-height: 50px;padding: 0 10px;color: #fff;text-align: center;font-size: 18px;font-weight: normal;}
+.reg-content .reg-warper {width: 390px;margin: 0 auto;}
+.reg-content .reg-warper ul {padding: 0px 40px 40px 40px;}
+.reg-content .reg-warper ul li {line-height: 30px;margin-bottom: 20px;position: relative;}
+.reg-content .reg-warper ul li .box
+{width: 300px;height: 40px;padding-left:8px;box-shadow: none;border-color: #e6e6e6;border-radius: 4px;color: #555;background-color: #fff;border: 1px solid #ccc;outline: none;font-size: 14px;}
+.reg-content .reg-warper input[type="button"] {cursor: pointer;}
+.reg-content .reg-warper input[type="button"]:hover {background: lightblue;color: #000;}
+.reg-content .special {width: 190px !important;}
+.reg-content .special+img {position: relative;top: 13px;}
+.reg-content .special+img:hover {cursor: pointer;}
+
+/*信息修改*/
+.reg-content .reg-warper ul li .box.change {width: 140px;}
+
+
+
+
+/* --错误提示---------------------------------
+--------------------------------------------*/
+.reg-content #reg-mess, #reg-messA, #reg-messB, #findpwd-mess{display: none;color: red;text-align: center;margin: 0;}

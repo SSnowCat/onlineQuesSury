@@ -1,0 +1,191 @@
+body {
+	background:rgb(84,174,149);
+	color: #fff;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 590px;
+}
+/* Main form wrapper */
+.fs-form-wrap {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+}
+/* Title */
+.titles{
+	position: absolute;
+	left: 300px;
+}
+.fs-title1{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	font-size: 20px;
+}
+.fs-title1 label{
+	display:block;
+	width: 20px;
+	font-size: 30px;
+}
+.fs-title2{
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	width: 200px;
+	font-size: 20px;
+}
+.fs-title2 label{
+	display:block;
+	width: 300px;
+}
+.fs-title3{
+	position: absolute;
+	top: 120px;
+	left: 0px;
+	width: 200px;
+	font-size: 20px;
+}
+.fs-title3 label{
+	display:block;
+	width: 300px;
+}
+.fs-title4{
+	position: absolute;
+	top: 180px;
+	left: 0px;
+	width: 200px;
+	font-size: 20px;
+}
+.fs-title4 label{
+	display:block;
+	width: 300px;
+}
+/* Form */
+.fs-form {
+	position: absolute;
+	text-align: left;
+	font-size: 1em;
+	top:150px;
+	left:300px;
+
+}
+
+/* Fields */
+.fs-fields {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+	top: 0;
+	list-style: none;
+	width: 800px;
+}
+/*姣忛亾棰樼殑闂撮殧鏍煎紡璁剧疆*/
+.fs-form-overview .fs-fields > li,
+.no-js .fs-form .fs-fields > li {
+	margin: 1em 0 2em;
+	padding: 0 0 2em 0;
+	border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+/*闂棰樼洰鐨勫瓧浣撳強鏍峰紡璁剧疆 */
+.fs-fields > li label {
+	position: relative;
+}
+
+.fs-fields > li label.fs-field-label {
+	display: inline-block;
+	padding: 0 5px 1em 0;
+	font-weight: 700;
+	pointer-events: none;
+}
+
+
+/*姣忛亾棰樼殑鎻愮ず鍙婇偅涓皬鍦堝湀鐨勮缃�*/
+.fs-form-full .fs-fields > li label[data-info]::after {
+	position: relative;
+	display: inline-block;
+	margin-left: 10px;
+	width: 17px;
+	height: 17px;
+	border: 2px solid rgb(35,73,63);
+	color: rgb(35,73,63);
+	border-radius: 50%;
+	content: 'i';
+	vertical-align: top;
+	text-align: center;
+	font-weight: 700;
+	font-style: italic;
+	font-size: 14px;
+	font-family: Georgia, serif;
+	line-height: 20px;
+	cursor: pointer;
+	pointer-events: auto;
+}
+/*姣忛亾棰樻彁绀虹殑瀛椾綋澶у皬*/
+.fs-form-full .fs-fields > li label[data-info]::before {
+    position: absolute;
+    bottom: 100%;
+   	left: 0;
+    padding: 0 0 10px;
+    min-width: 200px;
+	content: attr(data-info);
+	font-size: 0.6em;
+	color: rgb(145,205,189);
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translate3d(0,-5px,0);
+    transform: translate3d(0,-5px,0);
+    pointer-events: none;
+}
+
+.fs-form-full .fs-fields > li label[data-info]:hover::before {
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+/*鍘绘帀閫夐」涓婇潰鐨勭偣鐐�*/
+.fs-fields .fs-radio-custom input[type="radio"] {
+	position: absolute;
+	display: block;
+	margin: 30px auto 20px;
+	margin: 0 auto 20px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+/*棰樼洰鐨勪綅缃強瀛椾綋鏍峰紡*/
+.fs-fields > li .fs-radio-custom span {
+	float: left;
+	position: relative;
+	margin-right: 1%;
+	padding: 10px;
+	max-width: 170px;
+	width: 30%;
+	text-align: center;
+	font-weight: 700;
+	font-size: 70%;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/*棰樼洰閫夐」瀛椾綋棰滆壊*/
+.fs-fields > li .fs-radio-custom span label {
+	color: rgba(0,0,0,0.4);
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+/*submit button */
+button.fs-submit{
+	float: right;
+	padding: 0.6em 1.5em;
+	border: 3px solid rgb(35,73,63);
+	border-radius: 40px;
+	font-weight: 700;
+	color: rgb(35,73,63);
+}

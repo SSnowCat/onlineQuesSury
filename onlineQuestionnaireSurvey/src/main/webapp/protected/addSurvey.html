@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建问卷</title>
+	<link rel="stylesheet" type="text/css" href="../assets/css/addSurvey.css">
+</head>
+<body id="body">
+	<div class="reg-content">
+		<h1 class="reg-title">创 建 问 卷</h1>
+		<div class="reg-warper">
+      <form>
+        <ul>
+          <li id="reg-mess">不能为空!</li>
+          <li>
+            <input class="box" type="text" id="an-name" placeholder="问卷名称">
+          </li>
+          <li>
+            <input class="box" type="text" id="an-des" placeholder="问卷描述">
+          </li>
+          <li>
+            <input class="box" type="date" id="an-begin-date" placeholder="开始日期">
+          </li>
+          <li>
+            <input class="box" type="date" id="an-end-date" placeholder="结束日期">
+          </li>
+          <li>
+            <select class="box" id="isPublic">
+              <option value="0">仅自己可见</option>
+              <option value="1">所有人可见</option>
+            </select>
+          </li>
+        </ul>
+      </form>
+		</div>
+    <button class="submit-survey" id="submit-survey">提交问卷</button>
+	</div>
+  <button class="add-question" id="add-question">增加题目</button>
+
+  <div id="question-list">
+  </div>
+
+	<div class="que-box" id="add-box">
+		<h2 id="message" class="message">不能为空!</h2>
+    <div class="clear que-warper">
+      <span class="icon fl" id="add-btn">+</span>
+      <span class="icon fr" id="minus-btn">一</span>
+    </div>
+    <input id="ques-h" class="anw-input" type="text" placeholder="请输入题干">
+    <div id="input-list">
+      <input class="anw-input" type="text" placeholder="请输入选项, 新增请点加">
+      <input class="anw-input" type="text" placeholder="请输入选项, 新增请点加">
+      <input class="anw-input" type="text" placeholder="请输入选项, 新增请点加">
+      <input class="anw-input" type="text" placeholder="请输入选项, 新增请点加">
+    </div>
+    <div class="clear que-warper">
+      <button class="ok-btn fl" id="ok-btn">确定</button>
+      <button class="cancel-btn fr" id="cancel-btn">取消</button>
+    </div>
+  </div>
+    <script src="../Survey/js/global.js"></script>
+	<script src="../assets/js/addSurvey.js"></script>
+</body>
+</html>

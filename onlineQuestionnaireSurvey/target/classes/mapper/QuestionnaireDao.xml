@@ -27,6 +27,8 @@
 	<select id="getAllQuestionByPage" resultType="com.sicnu.baby.bean.Questionnaire">
 		select
 		qes_id,
+		username,
+		qes_profix,
 		qes_title,
 		is_public,
 		create_time,

@@ -73,7 +73,12 @@ public class ChartServiceImpl implements ChartService{
 		}else {			
 			Map<String, Integer> comAnalysis = analysisService.getResult(quesId);
 			Analysis analysis = new Analysis();
-			analysis.setComAnalysis(comAnalysis);
+			if(comAnalysis.size()==0){
+				analysis.setComAnalysis(null);
+				return null;
+			}else{
+			    analysis.setComAnalysis(comAnalysis);
+			}
 			
 			List<ConAnalysis> conAnalysisList = new ArrayList<>();
 			List<Map<String, Integer>> maps = analysisService.getStatisticalResults(quesId);
@@ -85,7 +90,12 @@ public class ChartServiceImpl implements ChartService{
 					}
 				}
 			}
-			analysis.setConAnalysis(conAnalysisList);
+			if(conAnalysisList.size()==0){
+				analysis.setConAnalysis(null);
+			}else {
+				analysis.setConAnalysis(conAnalysisList);	
+			}
+			
 			if((new Date()).getTime()>=questionnaire.getEndTime().getTime()){
 				if(questionnaireDao.updateResult(quesId,analysis.toString())==1){
 					return analysis;					

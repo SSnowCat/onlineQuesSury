@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>找回密码</title>
+	<link rel="stylesheet" type="text/css" href="../Survey/css/style.css">
+</head>
+<body id="reg-body">
+	<div class="reg-content">
+		<h1 class="reg-title">找 回 密 码</h1>
+		<div class="reg-warper">
+				<form>
+  		  	<ul>
+            <li id="findpwd-mess">这里是错误提示</li>
+            <li>
+              <input class="box" type="text" id="username" placeholder="用户名">
+            </li>
+            <li>
+              <input class="box" type="text" id="phone" placeholder="手机号">
+            </li>
+            <li>
+              <input class="box" type="password" id="pwd" placeholder="新密码">
+            </li>
+            <li>
+              <input class="box" type="password" id="confirm-pwd" placeholder="确认密码">
+            </li>
+            <li>
+              <input class="box special" type="text" id="sig" name="" placeholder="验证码">
+              <img id="sig-img" src="" style="width:98px;height:37px;"/>
+            </li>
+            <li>
+              <input class="box" id="findpwd-btn" type="button" value="找回密码"></input>
+            </li>	
+          </ul>
+				</form>
+		</div>
+	</div>
+
+	<script src="../Survey/js/constants.js"></script>
+	<script src="../Survey/js/global.js"></script>
+	<script src="../Survey/js/findPwd.js"></script>
+</body>
+</html>

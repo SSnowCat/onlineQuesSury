@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>显示问卷</title>
+<link rel="stylesheet" type="text/css" href="../QQ/css/component.css" />
+<script type="text/javascript" src="../assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../mhl/js/dataFormat.js"></script>
+<script type="text/javascript">
+     function getArg(){
+    	 var q = location.search.substring(1);
+    	 var qs = q.split('&');
+    	 var argStr = [];
+    	 if(qs){
+    		 for(var i=0;i<qs.length;i++){
+    			 argStr[i] = qs[i].split('=')[1];
+    		 }
+    	 }
+    	 return argStr;
+     }
+     
+     function write(data){
+    	 var str = '';
+    	 for(var i=0;i<data.length;i++){
+    		 str += '<li data-input-trigger><label class="fs-field-label fs-anim-upper" for="q'+i+'" data-info="这个问题的相关解释">'+data[i].stem+'</label>';
+    		 str += '<div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">';
+    		 for(let key in data[i].options){
+    			 str += '<span>'
+    			 str +='<input id="q'+i+'" name="q'+i+'" type="radio" value="conversion" required />'
+    		     str +='<label for="q'+i+'" class="radio-conversion">'+key+':'+data[i].options[key]+'</label>'
+    		     str +='</span>';
+    		 }
+    		 str +='</div>';
+    		 str +='</li>';
+    	 }
+    	 
+    	 $("#ol").append(str);
+     }
+     
+     
+     $(function(){
+    	 $.getJSON('../get/detail/'+getArg()[0]+'/questionnaire',function(data){
+        	 if(data.success){
+        		 $('#qesTitle').html(data.data.qesTitle);
+        		 $('#qesProfix').html(data.data.qesProfix);
+        		 $('#endTime').html('结束时间：'+getFormatDateByLong(data.data.endTime,"yyyy-MM-dd hh:mm:ss"));
+        		 $('#username').html('创建者：'+data.data.username);
+        		 //渲染题
+        		 var qesInfo = JSON.parse(data.data.qesInformation);
+        		 write(qesInfo);
+        	 }else{
+        		 alert(data.error);
+        	 }
+         });
+     });
+     
+     function gotoIndex(){
+    	 location.href='../index.html';
+     }
+     
+     function back(){
+    	 location.href = 'questionnaire.html';
+     }
+</script>
+</head>
+<body>
+	<div class="container">
+		<center>
+			<h1 id="qesTitle"></h1>
+		</center>
+		<div class="fs-form-wrap" id="fs-form-wrap">
+			<div class="titles">
+			    <h2 id="qesProfix"></h2>
+				<h3 id="endTime"></h3>
+				<h3 id="username"></h3>
+			</div>
+
+			<div id="myform" class="fs-form fs-form-full" autocomplete="off">
+				<ol class="fs-fields" id="ol">
+
+				</ol>
+				<!-- /fs-fields -->
+				<button class="fs-submit" type="button" onclick="gotoIndex()">已看</button>
+				<button class="fs-submit" type="button" onclick="back()">返回</button>
+			<!-- /fs-form -->
+			</div>
+		</div>
+		<!-- /fs-form-wrap -->
+	</div>
+	<!-- /container -->
+</body>
+</html>

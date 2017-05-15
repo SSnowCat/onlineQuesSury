@@ -1,0 +1,186 @@
+/*
+ *
+ * @author: 余正峰;
+ * @date: startTime:2017-05-06; 
+ * @description: Questionnair system;
+ *
+*/
+	
+
+/* --reset----------------------------------
+--------------------------------------------*/
+* {margin: 0;padding: 0;}
+img {border: 0}
+ul, ol, li {list-style: none;}
+a {text-decoration: none;}
+html {
+  min-height: 100%;
+}
+body {
+	font:14px/1.5 "宋体",arial, verdana, sans-serif;
+	width: 100%;
+  min-height: 100%;
+}
+
+
+/* --public--------------------------------- 
+--------------------------------------------*/
+.fl {float: left;}
+.fr {float: right;}
+.clear {zoom: 1;} /*IE*/
+.clear:after {content: " ";display: block;clear: both;}
+.ml20 {
+  margin-left: 20px;
+}
+
+/*********************************************register.html****************************************************/
+#reg-body {}
+.reg-content {z-index: 100;width: 400px;margin: 60px auto;background-size: cover;background-attachment: fixed;opacity: .7;box-shadow: 0 0 3px #000;border-radius: 5px;color: #666;border: 1px solid #000;}
+.reg-content .reg-title {height: 50px;line-height: 50px;padding: 0 10px;color: #555;text-align: center;font-size: 18px;font-weight: normal;}
+.reg-content .reg-warper {width: 390px;margin: 0 auto;}
+.reg-content .reg-warper ul {padding: 0px 40px 0px 40px;}
+.reg-content .reg-warper ul li {line-height: 30px;margin-bottom: 20px;position: relative;}
+.reg-content .reg-warper ul li .box
+{width: 300px;height: 40px;padding-left:8px;box-shadow: none;border-color: #e6e6e6;border-radius: 4px;color: #555;background-color: #fff;border: 1px solid #ccc;outline: none;font-size: 14px;}
+.reg-content .reg-warper input[type="button"] {cursor: pointer;}
+.reg-content .reg-warper input[type="button"]:hover {background: lightblue;color: #000;}
+.reg-content .special {width: 190px !important;}
+.reg-content .special+img {position: relative;top: 13px;}
+.reg-content .special+img:hover {cursor: pointer;}
+
+/*信息修改*/
+.reg-content .reg-warper ul li .box.change {width: 140px;}
+
+
+
+
+/* --错误提示---------------------------------
+--------------------------------------------*/
+.reg-content #reg-mess, #reg-messA, #reg-messB, #findpwd-mess{display: none;color: red;text-align: center;margin: 0;}
+
+.add-question {
+  display: block;
+  width: 200px;
+  height: 40px;
+  border-color: #e6e6e6;
+  border-radius: 4px;
+  color: #555;
+  background: #fff;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.add-question:hover {
+  background: #eee;
+}
+
+.que-box {
+  width: 400px;
+  box-shadow: 0 0 3px #000;
+  border-radius: 5px;
+  color: #666;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1000;
+  display: none;
+}
+
+.que-box h2 {
+  text-align: center;
+}
+
+.que-warper {
+  width: 200px;
+  margin: 10px auto;
+  padding: 15px;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #000;
+  opacity: .5;
+  z-index: 1;
+}
+
+.icon {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+  border: 2px solid red;
+  font-size: 40px;
+  color: red;
+  cursor: pointer;
+}
+
+.icon:hover {
+  background: #eee;
+}
+
+.message {
+  margin-top: 10px;
+  display: none;
+  color: red;
+}
+
+.anw-input {
+  display: block;
+  width: 300px;
+  height: 40px;
+  padding-left: 8px;
+  border-color: #e6e6e6;
+  color: #555;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 10px auto 0;
+}
+
+.cancel-btn, .ok-btn {
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  border-color: #e6e6e6;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.question {
+  width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 0 3px #000;
+  border-radius: 5px;
+  color: #666;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.submit-survey {
+  display: block;
+  width: 150px; 
+  height: 30px;
+  border-color: #e6e6e6;
+  border-radius: 4px;
+  color: #555;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 0 auto 10px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.submit-survey:hover {
+  background: #eee;
+}

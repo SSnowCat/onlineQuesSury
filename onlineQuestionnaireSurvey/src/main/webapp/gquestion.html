@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>显示问卷</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive"
+	/>
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="mhl/css/bootstrap.css">  
+	<link rel="stylesheet" href="QQ/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="QQ/css/icomoon.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="QQ/css/magnific-popup.css">
+	<link rel="stylesheet" href="QQ/css/style.css">
+    <link rel="stylesheet" type="text/css" href="mhl/css/style1.css">
+	<script type="text/javascript" src="mhl/js/dataFormat.js"></script>
+	<!-- jQuery -->
+	<script src="mhl/js/jquery-1.8.3.min.js"></script>
+	<style type="text/css">
+.cont li{
+  list-style-type: none;
+  float: left;
+  height: 200px;
+  margin-left: 40px;
+}
+.page_number{
+  position: relative;
+  top: 220px;
+  left: 210px;
+  
+}
+#gtco-footer{
+  margin-top: -50px;
+}
+		.btn-login {
+			position: relative;
+			left: -100px;
+		}
+		
+		.btn-register {
+			position: relative;
+			left: 40px;
+			top: -30px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+		<nav class="gtco-nav" role="navigation" style="background-image: url(mhl/images/img_bg_1.jpg); height: 90px;">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-xs-2">
+						<div id="gtco-logo">
+							<a href="index.html">在线问卷</a>
+						</div>
+					</div>
+					<div class="col-xs-8 text-center menu-1">
+						<ul>
+							<li class="active"><a href="index.html">首页</a></li>
+							<li><a href="ourTeam.html">关于我们</a></li>
+							<li class="has-dropdown"><a href="###">关于问卷</a>
+								<ul class="dropdown">
+									<li><a href="protected/questionnaire.html">所有问卷</a></li>
+								    <li><a href="protected/addSurvey.html">制作问卷</a></li>
+								    <li><a href="writeQuesEntrance.html">填写问卷</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown"><a href="#">关于结果</a>
+								<ul class="dropdown">
+								<li><a href="protected/quesEntrance.html">管理员查看结果分析</a></li>
+								<li><a href="quesResultEntrance.html">问卷填写者查看结果分析</a></li>
+							</ul>
+							</li>
+							<li><a href="contact.html">帮助</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-2 text-right hidden-xs menu-2">
+						<ul id="clr">
+							<li class="btn-cta btn-login"><a><span id="use">用户名</span></a></li>
+							<li class="btn-cta btn-register"><a href="javascript:;" onclick="exit();"><span>退出</span></a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+		<div class="cont s--inactive">
+			<!-- cont inner start -->
+			<ul class="cont__inner">
+
+			</ul>	
+		</div>
+		<script type="text/javascript">
+		function show(qlist){
+			var str = '';
+			for (var i = 0; i < qlist.length; i++) {
+				str += '<li class="el" onclick="gotoAnswer('+qlist[i].id+');">'
+				str += '<div class="el__inner">'
+				str += '<div class="el__bg"></div>'
+				str += '<div class="el__preview-cont">'
+				str += '<p>'+qlist[i].qesTitle+'</p>'
+				str += '<p>'+qlist[i].username+'</p>'
+				str += '</div>'
+				str += '</div>';
+				str += '</li>';
+			}
+			$('.cont__inner').append(str);
+			
+			var $cont = document.querySelector('.cont');
+			setTimeout(function () {
+				$cont.classList.remove('s--inactive');
+			}, 200);
+		}
+			
+				$(function () {
+					
+					$.getJSON('./get/user/private',function(data){
+						if(data.success){
+							$('#clr').html('');
+							$("#use").html(data.data);
+						}else{
+							return;
+						}
+					});
+					
+					$.getJSON(
+						'./get/user/answer',
+						function (data) {
+							if (data.success) {
+								var qlist = data.data;
+								show(qlist);
+							} else {
+								alert(data.error);
+							}
+						});
+				});
+				
+				function exit(){
+					$.getJSON(
+							'./delete/user/private',
+							function (data) {
+								if (data.success) {
+									location.href = 'index.html';
+								} else {
+									return;
+								}
+							});
+					
+				}
+				
+				function gotoAnswer(id){
+					location.href = 'answerInfo.html?id='+id;
+				}
+		</script>
+
+
+
+		<footer id="gtco-footer" role="contentinfo" >
+		<div class="gtco-container">
+			<div class="row row-pb-md">
+				<div class="col-md-4 gtco-widget">
+					<h3>川师五宝</h3>
+					<p>成员：秦秋，马菡露，余正峰，肖鹏坤，赖雪</p>
+					<p><a href="ourTeam.html">了解更多</a></p>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<ul class="gtco-footer-links">
+						<li><a href="#">关于</a></li>
+						<li><a href="#">帮助</a></li>
+						<li><a href="#">联系</a></li>
+						<li><a href="#">条款</a></li>
+						<li><a href="#">聚会</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<ul class="gtco-footer-links">
+						<li><a href="#">办事处</a></li>
+						<li><a href="#">隐私</a></li>
+						<li><a href="#">证明书</a></li>
+						<li><a href="#">手册</a></li>
+						<li><a href="#">服务台</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<ul class="gtco-footer-links">
+						<li><a href="#">找设计师</a></li>
+						<li><a href="#">找开发商</a></li>
+						<li><a href="#">团队</a></li>
+						<li><a href="#">广告</a></li>
+						<li><a href="#">API</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2017年 软件工程</small> 
+						<small class="block">在线问卷调查网站-川师五宝</small>
+					</p>
+					<p class="pull-right">
+						<ul class="gtco-social-icons pull-right">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="QQ/js/jquery.min.js"></script>
+	<!--返回最上 -->
+	<script src="QQ/js/jquery.easing.1.3.js"></script>
+	<!-- Waypoints -->
+	<script src="QQ/js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="QQ/js/owl.carousel.min.js"></script>
+	
+	<!-- 缩小帮网站 -->
+	<script src="QQ/js/jquery.magnific-popup.min.js"></script>
+	<script src="QQ/js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="QQ/js/main.js"></script>
+
+</body>
+
+</html>

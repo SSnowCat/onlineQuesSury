@@ -45,7 +45,7 @@ public class TestQuestionnaireAnswerDao {
 	
 	@Test
 	public void testGetAnswerViewBySessionId(){
-		List<AnswerView> answers = questionnaireAnswerDao.getAnswerViewBySessionId("789");
+		List<AnswerView> answers = questionnaireAnswerDao.getAnswerViewBySessionId("C1600563D786B1F48E9E86745CF6CCAD");
 		for(int i=0;i<answers.size();i++){
 			System.out.println(answers.get(i));
 		}

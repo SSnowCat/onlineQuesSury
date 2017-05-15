@@ -38,7 +38,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService{
 		try {
 			String qesTitle = qJson.getString("qesTitle");
 			short isPublic = (short)qJson.getInt("isPublic");
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 			Date startTime = sdf.parse(qJson.getString("startTime"));
 			Date endTime = sdf.parse(qJson.getString("endTime"));
 			String qesInformation = qJson.getString("qesInformation");

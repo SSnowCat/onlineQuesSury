@@ -5,9 +5,11 @@ package com.sicnu.baby.web;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,7 @@ import com.sicnu.baby.exception.QuesSurveyDataException;
 import com.sicnu.baby.exception.QuesSurveyException;
 import com.sicnu.baby.service.UserService;
 
-
+@Controller
 public class UserController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -38,7 +40,7 @@ public class UserController {
 	@RequestMapping(value="/session/user",
 			method=RequestMethod.POST,
 			produces={"application/json;charset=UTF-8"},
-			headers={"content-type=application/json;charset=UTF-8"})
+			headers={"content-type=application/json;charset=utf-8"})
 	public @ResponseBody QuestionnaireResult<Url> login(HttpSession session,
 			HttpServletResponse response,@RequestBody JSONObject json){
 		String username = json.optString("username");
@@ -60,40 +62,54 @@ public class UserController {
 
 	/**
 	 * 注销登陆
-	 * @param request
-	 * @return QuestionnaireResult<String>
+	 * @param session
+	 * @return QuestionnaireResult<Url>
 	 */
 	@RequestMapping(value="/delete/user/private",
-			method=RequestMethod.DELETE,
+			method=RequestMethod.GET,
 			produces={"application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<Url> deleteUser(HttpSession session){
-		session.invalidate();
+		session.setAttribute("user", null);
+		//session.invalidate();
 		return new QuestionnaireResult<>(true, new Url("login.html"),1);
 	}
-
+	
+	/**
+	 * 用户登录后获取用户名
+	 * @param session
+	 * @return QuestionnaireResult<String>
+	 */
+	@RequestMapping(value="/get/user/private",
+			method=RequestMethod.GET,
+			produces={"application/json;charset=UTF-8"})
+	public @ResponseBody QuestionnaireResult<String> getUser(HttpSession session){
+		User user = (User)session.getAttribute("user");
+		return new QuestionnaireResult<>(true, user.getUsername(),1);
+	}
 	/**
 	 * 用户注册账号
 	 * @param userJson
 	 * @return QuestionnaireResult<String>
 	 */
 	@RequestMapping(value="/put/user",
-			method=RequestMethod.PUT,
-			produces={"application/json;chaeset=UTF-8"},
+			method=RequestMethod.POST,
+			produces={"application/json;charset=UTF-8"},
 			headers={"content-type=application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<Url> regUser(@RequestBody JSONObject userJson,HttpSession session){
 		String code = session.getAttribute("identify").toString();
 		try{
 			boolean isSuccess = userService.regUser(userJson,code);
 			if(isSuccess){
-				return new QuestionnaireResult<Url>(true, new Url("success.html"), 1);
+				return new QuestionnaireResult<Url>(true, new Url("../login.html"), 1);
+			}else{
+				return new QuestionnaireResult<Url>(false, "系统故障,注册失败");
 			}
-			return new QuestionnaireResult<Url>(true, "注册失败");
 		}catch (QuesSurveyDataException e) {
 			logger.error(e.getMessage(),e);
-			return new QuestionnaireResult<Url>(true,e.getMessage());
+			return new QuestionnaireResult<Url>(false,e.getMessage());
 		}catch (QuesSurveyException e) {
 			logger.error(e.getMessage(),e);
-			return new QuestionnaireResult<Url>(true, e.getMessage());
+			return new QuestionnaireResult<Url>(false, e.getMessage());
 		}
 	}
 
@@ -104,8 +120,8 @@ public class UserController {
 	 * @return QuestionnaireResult<String>
 	 */
 	@RequestMapping(value="/patch/user/private",
-			method=RequestMethod.PATCH,
-			produces={"application/json;chaeset=UTF-8"},
+			method=RequestMethod.POST,
+			produces={"application/json;charset=UTF-8"},
 			headers={"content-type=application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<Url> updateUserPassword(@RequestBody JSONObject json,HttpSession session){
 		User user = (User)session.getAttribute("user");
@@ -122,7 +138,7 @@ public class UserController {
 		}
 		if(userService.updatePassword(username, password)){
 			session.invalidate();
-			return new QuestionnaireResult<>(true, new Url("login.html"), 1);
+			return new QuestionnaireResult<>(true, new Url("../login.html"), 1);
 		}else{
 			return new QuestionnaireResult<>(false, "修改失败");	
 		}
@@ -134,8 +150,8 @@ public class UserController {
 	 * @return QuestionnaireResult<String>
 	 */
 	@RequestMapping(value="/phone/patch/user/private",
-			method=RequestMethod.PATCH,
-			produces={"application/json;chaeset=UTF-8"},
+			method=RequestMethod.POST,
+			produces={"application/json;charset=UTF-8"},
 			headers={"content-type=application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<String> updateUserPhone(@RequestBody JSONObject json,HttpSession session){
 		User user = (User)session.getAttribute("user");
@@ -158,13 +174,13 @@ public class UserController {
 	 * @return QuestionnaireResult<String>
 	 */
 	@RequestMapping(value="/get/user",
-			method=RequestMethod.GET,
-			produces={"application/json;chaeset=UTF-8"},
+			method=RequestMethod.POST,
+			produces={"application/json;charset=UTF-8"},
 			headers={"content-type=application/json;charset=UTF-8"})
 	public @ResponseBody QuestionnaireResult<Url> findUser(@RequestBody JSONObject json,HttpSession session){
 		String username = json.optString("username");
 		String password = json.optString("password");
-		String rePassword = json.optString("rdPassword");
+		String rePassword = json.optString("rePassword");
 		long userPhone = json.optLong("userPhone");
 		String identify = json.optString("identify");
 		String code = session.getAttribute("identify").toString();
@@ -173,7 +189,7 @@ public class UserController {
 		}
 		try {
 			if(userService.findUserPassword(username, userPhone, password, rePassword)){
-				return new QuestionnaireResult<>(false, new Url("login.html"), 1);
+				return new QuestionnaireResult<>(true, new Url("../login.html"), 1);
 			}
 			return new QuestionnaireResult<>(false, "找回密码失败");
 		} catch (QuesSurveyException e) {
@@ -181,4 +197,6 @@ public class UserController {
 			return new QuestionnaireResult<>(false, e.getMessage());
 		}
 	}
+	
+	
 }

@@ -35,12 +35,20 @@ public class UserServiceImpl implements UserService{
 	public boolean regUser(JSONObject user,String code) throws QuesSurveyException,QuesSurveyDataException {
 		try {
 			String username = user.getString("username");
+			System.out.println(username);
 			String password = user.getString("password");
+			System.out.println(password);
 			long userPhone = user.getLong("userPhone");
+			System.out.println(userPhone);
 			String identify = user.getString("identify");
+			System.out.println(identify);
 			short userType = 0;
 			if(identify.toLowerCase().equals(code)){
+				if(exists(username)){
+					throw new QuesSurveyException("用户已存在,注册失败");
+				}
 				User user2 = new User(username, password, userType, userPhone);
+				System.out.println(user2);
 				if(userDao.insert(user2)==1){
 					return true;
 				}else{
@@ -51,8 +59,6 @@ public class UserServiceImpl implements UserService{
 			}
 		} catch (JSONException e) {
 			throw new QuesSurveyDataException("数据接收异常", e);
-		}catch (Exception e) {
-			throw new QuesSurveyException("用户已存在,注册失败");
 		}
 	}
 

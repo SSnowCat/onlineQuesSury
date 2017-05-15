@@ -27,9 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null){
-			response.setContentType("application/json");
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().println("{\"success\":false,\"error\":\"你无权访问此页面,请登陆\"}");
+			response.sendRedirect("/onlineQuestionnaireSurvey/error.html");
 			return false;
 		}
 		return true;

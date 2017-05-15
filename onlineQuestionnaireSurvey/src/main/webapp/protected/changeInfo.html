@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改信息</title>
+	<link rel="stylesheet" type="text/css" href="../Survey/css/style.css">
+</head>
+<body id="reg-body">
+	<div class="reg-content" id="A">
+		<h1 class="reg-title">修 改 密 码</h1>
+		<div class="reg-warper">
+				<form>
+  		  	<ul>
+            <li id="reg-messA">这里是错误提示</li>
+            <li>
+              <input class="box" type="password" id="new-pwdA" placeholder="新密码">
+            </li>
+            <li>
+              <input class="box" type="password" id="new-confirm-pwdA" placeholder="确认密码">
+            </li>
+            <li>
+              <input class="box special" type="text" id="sigA" placeholder="验证码">
+              <img id="sig-imgA" src="" style="width:98px;height:37px;"/>
+            </li>
+            <li>
+              <input class="box change" id="ensureA" type="button" value="确认修改"></input>
+              <input class="box change ml20" id="go-phone" type="button" value="去修改手机号"></input>
+            </li>	
+          </ul>
+				</form>
+		</div>
+	</div>
+
+	<div class="reg-content" id="B">
+		<h1 class="reg-title">修 改 手 机 号</h1>
+		<div class="reg-warper">
+				<form>
+  		  	<ul>
+            <li id="reg-messB">这里是错误提示</li>
+            <li>
+              <input class="box" type="text" id="phoneB" placeholder="原手机号">
+            </li>
+            <li>
+              <input class="box special" type="text" id="sigB" name="" placeholder="验证码">
+              <img id="sig-imgB" src="" />
+            </li>
+            <li>
+              <input class="box change" id="ensureB" type="button" value="确认修改"></input>
+              <input class="box change ml20" id="go-pwd" type="button" value="去修改密码"></input>
+            </li>	
+          </ul>
+				</form>
+		</div>
+	</div>
+
+	<script src="../Survey/js/constants.js"></script>
+	<script src="../Survey/js/global.js"></script>
+	<script src="../Survey/js/changeInfo.js"></script>
+</body>
+</html>

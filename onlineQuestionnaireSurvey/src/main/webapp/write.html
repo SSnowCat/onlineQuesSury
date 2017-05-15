@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>问卷调查</title>
+		<link rel="stylesheet" type="text/css" href="mhl/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="mhl/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="mhl/css/component.css" />
+		
+	</head>	
+	<body>
+		<div class="container">
+
+			<div class="fs-form-wrap" id="fs-form-wrap">
+				<div class="fs-title">
+					<h1>问卷名字</h1>
+				</div>
+				<input type="hidden" id="length"/>
+				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
+					<ol class="fs-fields" id="ol">
+					
+						
+					</ol><!-- /fs-fields -->
+					<button class="fs-submit" type="button" onclick="sub();">提交问卷</button>
+				</form><!-- /fs-form -->
+			</div><!-- /fs-form-wrap -->
+
+		</div><!-- /container -->
+		<script src="mhl/js/modernizr.custom.js"></script>
+		<script src="mhl/js/classie.js"></script>	
+		<script src="mhl/js/fullscreenForm.js"></script>
+		<script src="mhl/js/jquery-1.8.3.min.js"></script>
+		<script>
+			
+		</script>
+		<script type="text/javascript">
+		/*获取参数*/
+	     function getArg(){
+	    	 var q = location.search.substring(1);
+	    	 var qs = q.split('&');
+	    	 var argStr = [];
+	    	 if(qs){
+	    		 for(var i=0;i<qs.length;i++){
+	    			 argStr[i] = qs[i].split('=')[1];
+	    		 }
+	    	 }
+	    	 return argStr;
+	     }
+	     
+		/*渲染界面内容*/
+	     function write(data){
+	    	 var str = '';
+	    	 for(var i=0;i<data.length;i++){
+	    		 str += '<li data-input-trigger>';
+	    		 str += '<label class="fs-field-label fs-anim-upper" for="q1" data-info="这个问题的相关解释">'+data[i].stem+'</label>';
+	    		 str +='<div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower" required>';
+	    		 for(let key in data[i].options){
+	    			 str += '<span>'
+	    			 str +='<input id="q'+i+key+'" name="q'+i+'" type="radio" value="'+key+'" required />'
+	    		     str +='<label for="q'+i+key+'" class="radio-conversion">'+key+':'+data[i].options[key]+'</label>'
+	    		     str +='</span>';
+	    		 }
+	    		 str +='</div>';
+	    		 str +='</div>';
+	    		 str +='</li>';
+	    	 }
+	    	 
+	    	 $("#ol").append(str);
+	     }
+	     
+	     
+	     $(function(){
+	    	 $.getJSON('get/detail/'+getArg()[0]+'/questionnaire',function(data){
+	        	 if(data.success){
+	        		 //渲染题
+	        		 var qesInfo = JSON.parse(data.data.qesInformation);
+	        		 $("#length").val(qesInfo.length);
+	        		 write(qesInfo);
+	        		 (function() {
+	     				var formWrap = document.getElementById( 'fs-form-wrap' );
+	     				new FForm( formWrap, {
+	     					onReview : function() {
+	     						classie.add( document.body, 'overview' ); 
+	     					}
+	     				} );
+	     			})();
+	        	 }else{
+	        		 alert(data.error);
+	        	 }
+	         });
+	     });
+		
+		    function sub(){
+		    	var length = $("#length").val();
+		    	var str = '';
+		    	for(var i=0;i<length;i++){
+		    		if(i+1<length){
+		    			str += (i+1)+'='+$('input[name="q'+i+'"]:checked').val()+';';	
+		    		}else{
+		    			str += (i+1)+'='+$('input[name="q'+i+'"]:checked').val();
+		    		}
+		    	}
+		    	$.ajax({
+		    		type:'post',
+		    		url:'post/user/answer',
+		    		contentType: "application/json;charset=utf-8",
+		    		dataType:'json',
+		    		data:JSON.stringify(getData(str)),
+		    		success:function(data){
+		    			if(data.success){
+		    				alert(data.data);
+		    				location.href='gquestion.html';
+		    			}else{
+		    				alert(data.error);
+		    			}
+		    		},
+		    		error:function(jqXHR){
+		    			alert(jqXHR.status);
+		    		}
+		    	});
+		    }
+		    
+		    function getData(str){
+		    	var data = {
+		    	    qesId:getArg()[0],
+		    	    answer:str
+		    	}
+		    	return JSON.stringify(data);
+		    }
+		</script>
+	</body>
+</html>
